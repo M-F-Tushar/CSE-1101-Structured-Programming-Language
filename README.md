@@ -1,4 +1,4 @@
-# CSE-1101 - Programming Problems 📘
+# CSE-1101 - Structured-Programming-Language 📘
 
 This repository contains all programming problems and solutions from the CSE-1101 course lectures. Each lecture folder includes relevant C programs that demonstrate key programming concepts.
 
