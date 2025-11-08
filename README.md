@@ -2,7 +2,12 @@
 
 This repository contains all programming problems and solutions from the CSE-1101 course lectures. Each lecture folder includes relevant C programs that demonstrate key programming concepts.
 
+## 📖 [Comprehensive C Programming Cheat Sheet](./C_PROGRAMMING_CHEAT_SHEET.md)
+
+**NEW!** A complete reference guide covering all concepts from this course with definitions, explanations, and examples. Perfect for quick revision and exam preparation! ⭐
+
 ## Table of Contents 📜
+- **[📖 Comprehensive Cheat Sheet](./C_PROGRAMMING_CHEAT_SHEET.md)** - Complete reference for all topics
 - [Lecture 02: Data Types, Variables and Data Output](#lecture-02-data-types-variables-and-data-output)
 - [Lecture 03: Getting Input with scanf()](#lecture-03-getting-input-with-scanf)
 - [Lecture 04: Operators](#lecture-04-operators)
