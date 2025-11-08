@@ -1,3 +1,1804 @@
+# C Programming Cheat Sheet 📘
+
+A comprehensive reference guide for C programming covering all fundamental and advanced concepts with practical examples.
+
+---
+
+## Table of Contents
+
+### Fundamental Concepts
+1. [Introduction and Basic Structure](#1-introduction-and-basic-structure)
+2. [Data Types and Variables](#2-data-types-and-variables)
+3. [Input/Output Operations](#3-inputoutput-operations)
+4. [Operators](#4-operators)
+5. [Control Structures](#5-control-structures)
+6. [Loops](#6-loops)
+7. [Arrays](#7-arrays)
+8. [Pointers](#8-pointers)
+9. [Strings](#9-strings)
+10. [Functions](#10-functions)
+11. [Structures and Unions](#11-structures-and-unions)
+
+### Advanced Concepts
+12. [File Handling](#12-file-handling)
+13. [Dynamic Memory Allocation](#13-dynamic-memory-allocation)
+14. [Preprocessor Directives](#14-preprocessor-directives)
+15. [Typedef and Enums](#15-typedef-and-enums)
+16. [Command Line Arguments](#16-command-line-arguments)
+17. [Bitwise Operators](#17-bitwise-operators)
+18. [Storage Classes](#18-storage-classes)
+19. [Advanced Concepts](#19-advanced-concepts)
+20. [Common Standard Library Functions](#20-common-standard-library-functions)
+21. [Best Practices and Tips](#21-best-practices-and-tips)
+22. [Quick Reference](#22-quick-reference)
+
+---
+
+## 1. Introduction and Basic Structure
+
+### 1.1 Basic Program Structure
+
+**Definition:** Every C program consists of one or more functions, with `main()` being the entry point.
+
+**Explanation:** A C program includes preprocessor directives, declarations, and statements enclosed in functions.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+### 1.2 Comments
+
+**Definition:** Non-executable text used to document code.
+
+**Explanation:** 
+- Single-line comments: `// comment`
+- Multi-line comments: `/* comment */`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // This is a single-line comment
+    
+    /* This is a
+       multi-line comment */
+    
+    printf("Comments help explain code!\n");
+    return 0;
+}
+```
+
+### 1.3 Header Files
+
+**Definition:** Files containing function declarations and macro definitions.
+
+**Explanation:** Common header files include:
+- `stdio.h` - Input/Output functions
+- `stdlib.h` - Standard library functions
+- `string.h` - String manipulation functions
+- `math.h` - Mathematical functions
+
+**Example:**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main() {
+    printf("Square root of 16: %.2f\n", sqrt(16.0));
+    return 0;
+}
+```
+
+---
+
+## 2. Data Types and Variables
+
+### 2.1 Basic Data Types
+
+**Definition:** Data types specify the type of data a variable can store.
+
+**Explanation:**
+- `int` - Integer (typically 4 bytes)
+- `float` - Single-precision floating point (4 bytes)
+- `double` - Double-precision floating point (8 bytes)
+- `char` - Single character (1 byte)
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    float height = 5.9;
+    double pi = 3.14159265359;
+    char grade = 'A';
+    
+    printf("Age: %d\n", age);
+    printf("Height: %.1f\n", height);
+    printf("Pi: %.10lf\n", pi);
+    printf("Grade: %c\n", grade);
+    
+    return 0;
+}
+```
+
+### 2.2 Variable Declaration and Initialization
+
+**Definition:** Creating variables and optionally assigning initial values.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Declaration only
+    int x;
+    
+    // Declaration with initialization
+    int y = 10;
+    
+    // Multiple declarations
+    int a, b, c;
+    
+    // Multiple declarations with initialization
+    int p = 1, q = 2, r = 3;
+    
+    x = 5;  // Assignment after declaration
+    
+    printf("x = %d, y = %d\n", x, y);
+    printf("p = %d, q = %d, r = %d\n", p, q, r);
+    
+    return 0;
+}
+```
+
+### 2.3 Constants
+
+**Definition:** Values that cannot be changed during program execution.
+
+**Explanation:**
+- Use `const` keyword
+- Use `#define` preprocessor directive
+
+**Example:**
+```c
+#include <stdio.h>
+
+#define PI 3.14159
+#define MAX_SIZE 100
+
+int main() {
+    const int MIN_AGE = 18;
+    
+    printf("PI = %.5f\n", PI);
+    printf("MAX_SIZE = %d\n", MAX_SIZE);
+    printf("MIN_AGE = %d\n", MIN_AGE);
+    
+    // MIN_AGE = 20;  // Error: cannot modify const
+    
+    return 0;
+}
+```
+
+### 2.4 Type Modifiers
+
+**Definition:** Keywords that modify the properties of basic data types.
+
+**Explanation:**
+- `signed` / `unsigned` - Determines if negative values are allowed
+- `short` / `long` - Modifies the size of the data type
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    unsigned int positiveOnly = 100;
+    signed int canBeNegative = -50;
+    
+    short int smallNumber = 32000;
+    long int bigNumber = 2147483647;
+    long long int veryBigNumber = 9223372036854775807LL;
+    
+    printf("Unsigned: %u\n", positiveOnly);
+    printf("Signed: %d\n", canBeNegative);
+    printf("Short: %hd\n", smallNumber);
+    printf("Long: %ld\n", bigNumber);
+    printf("Long Long: %lld\n", veryBigNumber);
+    
+    return 0;
+}
+```
+
+### 2.5 sizeof Operator
+
+**Definition:** Returns the size of a data type or variable in bytes.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Size of int: %lu bytes\n", sizeof(int));
+    printf("Size of float: %lu bytes\n", sizeof(float));
+    printf("Size of double: %lu bytes\n", sizeof(double));
+    printf("Size of char: %lu bytes\n", sizeof(char));
+    
+    int arr[10];
+    printf("Size of array: %lu bytes\n", sizeof(arr));
+    
+    return 0;
+}
+```
+
+---
+
+## 3. Input/Output Operations
+
+### 3.1 printf() - Formatted Output
+
+**Definition:** Displays formatted output to the console.
+
+**Explanation:** Uses format specifiers to control output format.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int num = 42;
+    float pi = 3.14159;
+    char ch = 'X';
+    
+    printf("Integer: %d\n", num);
+    printf("Float: %.2f\n", pi);
+    printf("Character: %c\n", ch);
+    printf("String: %s\n", "Hello");
+    
+    // Field width and alignment
+    printf("Right aligned: %10d\n", num);
+    printf("Left aligned: %-10d\n", num);
+    printf("Zero padded: %05d\n", num);
+    
+    return 0;
+}
+```
+
+### 3.2 scanf() - Formatted Input
+
+**Definition:** Reads formatted input from the user.
+
+**Explanation:** Uses format specifiers and requires addresses of variables (using &).
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int age;
+    float salary;
+    char initial;
+    
+    printf("Enter your age: ");
+    scanf("%d", &age);
+    
+    printf("Enter your salary: ");
+    scanf("%f", &salary);
+    
+    printf("Enter your initial: ");
+    scanf(" %c", &initial);  // Space before %c to skip whitespace
+    
+    printf("\nYou entered:\n");
+    printf("Age: %d\n", age);
+    printf("Salary: %.2f\n", salary);
+    printf("Initial: %c\n", initial);
+    
+    return 0;
+}
+```
+
+### 3.3 getchar() and putchar()
+
+**Definition:** Functions for reading and writing single characters.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    char ch;
+    
+    printf("Enter a character: ");
+    ch = getchar();
+    
+    printf("You entered: ");
+    putchar(ch);
+    putchar('\n');
+    
+    return 0;
+}
+```
+
+### 3.4 gets() and puts()
+
+**Definition:** Functions for reading and writing strings.
+
+**Note:** `gets()` is deprecated; use `fgets()` instead for safety.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    char name[50];
+    
+    printf("Enter your name: ");
+    fgets(name, sizeof(name), stdin);
+    
+    printf("Hello, ");
+    fputs(name, stdout);
+    
+    return 0;
+}
+```
+
+---
+
+## 4. Operators
+
+### 4.1 Arithmetic Operators
+
+**Definition:** Operators for mathematical calculations.
+
+**Explanation:**
+- `+` Addition
+- `-` Subtraction
+- `*` Multiplication
+- `/` Division
+- `%` Modulus (remainder)
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 3;
+    
+    printf("a + b = %d\n", a + b);  // 13
+    printf("a - b = %d\n", a - b);  // 7
+    printf("a * b = %d\n", a * b);  // 30
+    printf("a / b = %d\n", a / b);  // 3 (integer division)
+    printf("a %% b = %d\n", a % b); // 1 (remainder)
+    
+    float x = 10.0, y = 3.0;
+    printf("x / y = %.2f\n", x / y); // 3.33 (float division)
+    
+    return 0;
+}
+```
+
+### 4.2 Relational Operators
+
+**Definition:** Operators for comparing values.
+
+**Explanation:**
+- `==` Equal to
+- `!=` Not equal to
+- `>` Greater than
+- `<` Less than
+- `>=` Greater than or equal to
+- `<=` Less than or equal to
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 5, b = 10;
+    
+    printf("a == b: %d\n", a == b);  // 0 (false)
+    printf("a != b: %d\n", a != b);  // 1 (true)
+    printf("a > b: %d\n", a > b);    // 0 (false)
+    printf("a < b: %d\n", a < b);    // 1 (true)
+    printf("a >= b: %d\n", a >= b);  // 0 (false)
+    printf("a <= b: %d\n", a <= b);  // 1 (true)
+    
+    return 0;
+}
+```
+
+### 4.3 Logical Operators
+
+**Definition:** Operators for combining boolean expressions.
+
+**Explanation:**
+- `&&` Logical AND
+- `||` Logical OR
+- `!` Logical NOT
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 1, b = 0;
+    
+    printf("a && b: %d\n", a && b);  // 0 (false)
+    printf("a || b: %d\n", a || b);  // 1 (true)
+    printf("!a: %d\n", !a);          // 0 (false)
+    printf("!b: %d\n", !b);          // 1 (true)
+    
+    // Practical example
+    int age = 25;
+    int hasLicense = 1;
+    
+    if (age >= 18 && hasLicense) {
+        printf("Can drive!\n");
+    }
+    
+    return 0;
+}
+```
+
+### 4.4 Assignment Operators
+
+**Definition:** Operators for assigning values to variables.
+
+**Explanation:**
+- `=` Simple assignment
+- `+=` Add and assign
+- `-=` Subtract and assign
+- `*=` Multiply and assign
+- `/=` Divide and assign
+- `%=` Modulus and assign
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int x = 10;
+    
+    printf("Initial x = %d\n", x);
+    
+    x += 5;  // x = x + 5
+    printf("After x += 5: %d\n", x);  // 15
+    
+    x -= 3;  // x = x - 3
+    printf("After x -= 3: %d\n", x);  // 12
+    
+    x *= 2;  // x = x * 2
+    printf("After x *= 2: %d\n", x);  // 24
+    
+    x /= 4;  // x = x / 4
+    printf("After x /= 4: %d\n", x);  // 6
+    
+    x %= 4;  // x = x % 4
+    printf("After x %%= 4: %d\n", x); // 2
+    
+    return 0;
+}
+```
+
+### 4.5 Increment and Decrement Operators
+
+**Definition:** Operators for increasing or decreasing a variable by 1.
+
+**Explanation:**
+- `++` Increment (prefix: `++x`, postfix: `x++`)
+- `--` Decrement (prefix: `--x`, postfix: `x--`)
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 5, b = 5;
+    
+    printf("a = %d, b = %d\n", a, b);
+    
+    // Prefix increment
+    printf("++a = %d\n", ++a);  // Increments first, then returns (6)
+    printf("a = %d\n", a);      // 6
+    
+    // Postfix increment
+    printf("b++ = %d\n", b++);  // Returns first, then increments (5)
+    printf("b = %d\n", b);      // 6
+    
+    int x = 10;
+    printf("--x = %d\n", --x);  // 9
+    printf("x-- = %d\n", x--);  // 9
+    printf("x = %d\n", x);      // 8
+    
+    return 0;
+}
+```
+
+### 4.6 Ternary Operator
+
+**Definition:** Conditional operator that returns one of two values based on a condition.
+
+**Syntax:** `condition ? value_if_true : value_if_false`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10, b = 20;
+    int max;
+    
+    // Find maximum
+    max = (a > b) ? a : b;
+    printf("Maximum: %d\n", max);  // 20
+    
+    // Check even or odd
+    int num = 7;
+    printf("%d is %s\n", num, (num % 2 == 0) ? "even" : "odd");
+    
+    return 0;
+}
+```
+
+---
+
+## 5. Control Structures
+
+### 5.1 if Statement
+
+**Definition:** Executes a block of code if a condition is true.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int age = 20;
+    
+    if (age >= 18) {
+        printf("You are an adult.\n");
+    }
+    
+    return 0;
+}
+```
+
+### 5.2 if-else Statement
+
+**Definition:** Executes one block if condition is true, another if false.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int num = 7;
+    
+    if (num % 2 == 0) {
+        printf("%d is even.\n", num);
+    } else {
+        printf("%d is odd.\n", num);
+    }
+    
+    return 0;
+}
+```
+
+### 5.3 if-else if-else Ladder
+
+**Definition:** Tests multiple conditions sequentially.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int marks = 85;
+    
+    if (marks >= 90) {
+        printf("Grade: A+\n");
+    } else if (marks >= 80) {
+        printf("Grade: A\n");
+    } else if (marks >= 70) {
+        printf("Grade: B\n");
+    } else if (marks >= 60) {
+        printf("Grade: C\n");
+    } else {
+        printf("Grade: F\n");
+    }
+    
+    return 0;
+}
+```
+
+### 5.4 Nested if Statements
+
+**Definition:** if statements inside other if statements.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int age = 25;
+    int hasLicense = 1;
+    
+    if (age >= 18) {
+        if (hasLicense) {
+            printf("You can drive.\n");
+        } else {
+            printf("You need a license.\n");
+        }
+    } else {
+        printf("You are too young to drive.\n");
+    }
+    
+    return 0;
+}
+```
+
+### 5.5 switch Statement
+
+**Definition:** Multi-way branch statement that tests a variable against multiple values.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int day = 3;
+    
+    switch(day) {
+        case 1:
+            printf("Monday\n");
+            break;
+        case 2:
+            printf("Tuesday\n");
+            break;
+        case 3:
+            printf("Wednesday\n");
+            break;
+        case 4:
+            printf("Thursday\n");
+            break;
+        case 5:
+            printf("Friday\n");
+            break;
+        case 6:
+            printf("Saturday\n");
+            break;
+        case 7:
+            printf("Sunday\n");
+            break;
+        default:
+            printf("Invalid day\n");
+    }
+    
+    return 0;
+}
+```
+
+### 5.6 goto Statement
+
+**Definition:** Unconditional jump to a labeled statement.
+
+**Note:** Use sparingly as it can make code hard to follow.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int i = 0;
+    
+    start:
+    if (i < 5) {
+        printf("%d ", i);
+        i++;
+        goto start;
+    }
+    printf("\n");
+    
+    return 0;
+}
+// Output: 0 1 2 3 4
+```
+
+---
+
+## 6. Loops
+
+### 6.1 for Loop
+
+**Definition:** Loop that repeats a block of code a specific number of times.
+
+**Syntax:** `for(initialization; condition; increment/decrement)`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Print numbers 1 to 5
+    for (int i = 1; i <= 5; i++) {
+        printf("%d ", i);
+    }
+    printf("\n");
+    
+    // Calculate sum of first 10 natural numbers
+    int sum = 0;
+    for (int i = 1; i <= 10; i++) {
+        sum += i;
+    }
+    printf("Sum: %d\n", sum);  // 55
+    
+    return 0;
+}
+```
+
+### 6.2 while Loop
+
+**Definition:** Loop that repeats while a condition is true (pre-test loop).
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int i = 1;
+    
+    while (i <= 5) {
+        printf("%d ", i);
+        i++;
+    }
+    printf("\n");
+    
+    // Find factorial
+    int n = 5, factorial = 1;
+    int count = 1;
+    
+    while (count <= n) {
+        factorial *= count;
+        count++;
+    }
+    printf("Factorial of %d: %d\n", n, factorial);
+    
+    return 0;
+}
+```
+
+### 6.3 do-while Loop
+
+**Definition:** Loop that executes at least once, then repeats while condition is true (post-test loop).
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int i = 1;
+    
+    do {
+        printf("%d ", i);
+        i++;
+    } while (i <= 5);
+    printf("\n");
+    
+    // Menu example
+    int choice;
+    do {
+        printf("\nMenu:\n");
+        printf("1. Start\n");
+        printf("2. Stop\n");
+        printf("3. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        
+        if (choice == 1) printf("Started!\n");
+        else if (choice == 2) printf("Stopped!\n");
+        else if (choice == 3) printf("Exiting...\n");
+        else printf("Invalid choice!\n");
+        
+    } while (choice != 3);
+    
+    return 0;
+}
+```
+
+### 6.4 Nested Loops
+
+**Definition:** Loops inside other loops.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Multiplication table
+    for (int i = 1; i <= 5; i++) {
+        for (int j = 1; j <= 5; j++) {
+            printf("%3d ", i * j);
+        }
+        printf("\n");
+    }
+    
+    // Print pattern
+    printf("\n");
+    for (int i = 1; i <= 5; i++) {
+        for (int j = 1; j <= i; j++) {
+            printf("* ");
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+```
+
+### 6.5 break Statement
+
+**Definition:** Exits a loop immediately.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Find first number divisible by both 3 and 5
+    for (int i = 1; i <= 50; i++) {
+        if (i % 3 == 0 && i % 5 == 0) {
+            printf("First number divisible by both 3 and 5: %d\n", i);
+            break;
+        }
+    }
+    
+    return 0;
+}
+```
+
+### 6.6 continue Statement
+
+**Definition:** Skips the rest of the current iteration and moves to the next.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Print odd numbers from 1 to 10
+    for (int i = 1; i <= 10; i++) {
+        if (i % 2 == 0) {
+            continue;  // Skip even numbers
+        }
+        printf("%d ", i);
+    }
+    printf("\n");
+    
+    return 0;
+}
+// Output: 1 3 5 7 9
+```
+
+---
+
+## 7. Arrays
+
+### 7.1 One-Dimensional Arrays
+
+**Definition:** Collection of elements of the same data type stored in contiguous memory.
+
+**Syntax:** `datatype arrayName[size];`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Declaration and initialization
+    int numbers[5] = {10, 20, 30, 40, 50};
+    
+    // Accessing elements
+    printf("First element: %d\n", numbers[0]);
+    printf("Third element: %d\n", numbers[2]);
+    
+    // Modifying elements
+    numbers[1] = 25;
+    
+    // Print all elements
+    printf("Array elements: ");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+### 7.2 Array Input and Output
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[5];
+    int sum = 0;
+    
+    printf("Enter 5 numbers:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+    
+    printf("\nYou entered: ");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", arr[i]);
+    }
+    
+    printf("\nSum: %d\n", sum);
+    printf("Average: %.2f\n", sum / 5.0);
+    
+    return 0;
+}
+```
+
+### 7.3 Two-Dimensional Arrays
+
+**Definition:** Array of arrays, representing data in tabular form (rows and columns).
+
+**Syntax:** `datatype arrayName[rows][columns];`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int matrix[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    
+    printf("Matrix:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+```
+
+### 7.4 Array Operations
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[] = {5, 2, 8, 1, 9, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    // Find maximum
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    printf("Maximum: %d\n", max);
+    
+    // Find minimum
+    int min = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    printf("Minimum: %d\n", min);
+    
+    // Linear search
+    int search = 8;
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == search) {
+            printf("%d found at index %d\n", search, i);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) {
+        printf("%d not found\n", search);
+    }
+    
+    return 0;
+}
+```
+
+### 7.5 Bubble Sort
+
+**Definition:** Simple sorting algorithm that repeatedly swaps adjacent elements if they're in wrong order.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Original array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    // Bubble sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+---
+
+## 8. Pointers
+
+### 8.1 Pointer Basics
+
+**Definition:** A variable that stores the memory address of another variable.
+
+**Syntax:** `datatype *pointerName;`
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int num = 10;
+    int *ptr;
+    
+    ptr = &num;  // Store address of num in ptr
+    
+    printf("Value of num: %d\n", num);
+    printf("Address of num: %p\n", (void*)&num);
+    printf("Value of ptr: %p\n", (void*)ptr);
+    printf("Value at ptr: %d\n", *ptr);  // Dereference
+    
+    return 0;
+}
+```
+
+### 8.2 Pointer Arithmetic
+
+**Definition:** Arithmetic operations on pointer addresses.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int *ptr = arr;  // Points to first element
+    
+    printf("Using pointer arithmetic:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d\n", i, *(ptr + i));
+    }
+    
+    printf("\nIncrementing pointer:\n");
+    ptr = arr;
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", *ptr);
+        ptr++;
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+### 8.3 Pointers and Arrays
+
+**Definition:** Array name acts as a pointer to the first element.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int *ptr = arr;
+    
+    // Different ways to access array elements
+    printf("arr[0] = %d\n", arr[0]);
+    printf("*arr = %d\n", *arr);
+    printf("*ptr = %d\n", *ptr);
+    printf("ptr[0] = %d\n", ptr[0]);
+    
+    printf("\nAll elements:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", *(arr + i));
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+### 8.4 Pointers and Functions
+
+**Definition:** Passing addresses to functions to modify original variables (pass by reference).
+
+**Example:**
+```c
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = 10, y = 20;
+    
+    printf("Before swap: x = %d, y = %d\n", x, y);
+    swap(&x, &y);
+    printf("After swap: x = %d, y = %d\n", x, y);
+    
+    return 0;
+}
+```
+
+### 8.5 NULL Pointer
+
+**Definition:** Pointer that doesn't point to any valid memory location.
+
+**Example:**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = NULL;
+    
+    // Always check before dereferencing
+    if (ptr == NULL) {
+        printf("Pointer is NULL\n");
+    }
+    
+    // Allocate memory
+    ptr = (int*) malloc(sizeof(int));
+    
+    if (ptr != NULL) {
+        *ptr = 100;
+        printf("Value: %d\n", *ptr);
+        free(ptr);
+        ptr = NULL;  // Good practice
+    }
+    
+    return 0;
+}
+```
+
+---
+
+## 9. Strings
+
+### 9.1 String Basics
+
+**Definition:** Array of characters terminated by null character '\0'.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    // Different ways to declare strings
+    char str1[] = "Hello";
+    char str2[20] = "World";
+    char str3[] = {'H', 'i', '\0'};
+    
+    printf("%s\n", str1);
+    printf("%s\n", str2);
+    printf("%s\n", str3);
+    
+    return 0;
+}
+```
+
+### 9.2 String Input/Output
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    char name[50];
+    
+    // Using scanf (reads until whitespace)
+    printf("Enter your first name: ");
+    scanf("%s", name);
+    printf("Hello, %s!\n", name);
+    
+    // Clear input buffer
+    while (getchar() != '\n');
+    
+    // Using fgets (reads entire line)
+    printf("Enter your full name: ");
+    fgets(name, sizeof(name), stdin);
+    printf("Welcome, %s", name);
+    
+    return 0;
+}
+```
+
+### 9.3 String Functions (string.h)
+
+**Definition:** Standard library functions for string manipulation.
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[50] = "Hello";
+    char str2[50] = "World";
+    char str3[50];
+    
+    // strlen - Get length
+    printf("Length of str1: %lu\n", strlen(str1));
+    
+    // strcpy - Copy string
+    strcpy(str3, str1);
+    printf("str3: %s\n", str3);
+    
+    // strcat - Concatenate strings
+    strcat(str1, " ");
+    strcat(str1, str2);
+    printf("Concatenated: %s\n", str1);
+    
+    // strcmp - Compare strings
+    int result = strcmp("abc", "xyz");
+    if (result < 0) {
+        printf("abc comes before xyz\n");
+    }
+    
+    return 0;
+}
+```
+
+### 9.4 Common String Operations
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char str[] = "Hello World";
+    
+    // Convert to uppercase
+    printf("Uppercase: ");
+    for (int i = 0; str[i] != '\0'; i++) {
+        printf("%c", toupper(str[i]));
+    }
+    printf("\n");
+    
+    // Convert to lowercase
+    printf("Lowercase: ");
+    for (int i = 0; str[i] != '\0'; i++) {
+        printf("%c", tolower(str[i]));
+    }
+    printf("\n");
+    
+    // Reverse string
+    int len = strlen(str);
+    printf("Reversed: ");
+    for (int i = len - 1; i >= 0; i--) {
+        printf("%c", str[i]);
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+### 9.5 String with Pointers
+
+**Example:**
+```c
+#include <stdio.h>
+
+int main() {
+    char str[] = "Programming";
+    char *ptr = str;
+    
+    // Print using pointer
+    printf("String: %s\n", ptr);
+    
+    // Print character by character
+    printf("Characters: ");
+    while (*ptr != '\0') {
+        printf("%c ", *ptr);
+        ptr++;
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+---
+
+## 10. Functions
+
+### 10.1 Function Basics
+
+**Definition:** Block of code that performs a specific task and can be reused.
+
+**Syntax:**
+```c
+return_type function_name(parameter_list) {
+    // function body
+    return value;
+}
+```
+
+**Example:**
+```c
+#include <stdio.h>
+
+// Function declaration (prototype)
+int add(int a, int b);
+
+int main() {
+    int result = add(5, 3);
+    printf("Sum: %d\n", result);
+    return 0;
+}
+
+// Function definition
+int add(int a, int b) {
+    return a + b;
+}
+```
+
+### 10.2 Function with No Return Value (void)
+
+**Example:**
+```c
+#include <stdio.h>
+
+void greet(char name[]) {
+    printf("Hello, %s!\n", name);
+}
+
+void printStars(int n) {
+    for (int i = 0; i < n; i++) {
+        printf("* ");
+    }
+    printf("\n");
+}
+
+int main() {
+    greet("Alice");
+    printStars(5);
+    return 0;
+}
+```
+
+### 10.3 Function with No Parameters
+
+**Example:**
+```c
+#include <stdio.h>
+
+int getRandomNumber() {
+    return 42;  // "Random" number
+}
+
+void displayMenu() {
+    printf("1. Start\n");
+    printf("2. Stop\n");
+    printf("3. Exit\n");
+}
+
+int main() {
+    displayMenu();
+    int num = getRandomNumber();
+    printf("Number: %d\n", num);
+    return 0;
+}
+```
+
+### 10.4 Pass by Value vs Pass by Reference
+
+**Definition:**
+- Pass by Value: Function receives a copy of the argument
+- Pass by Reference: Function receives the address of the argument
+
+**Example:**
+```c
+#include <stdio.h>
+
+// Pass by value
+void modifyValue(int x) {
+    x = 100;
+    printf("Inside function: x = %d\n", x);
+}
+
+// Pass by reference
+void modifyReference(int *x) {
+    *x = 100;
+    printf("Inside function: *x = %d\n", *x);
+}
+
+int main() {
+    int num = 10;
+    
+    printf("Original: num = %d\n", num);
+    modifyValue(num);
+    printf("After pass by value: num = %d\n\n", num);  // Still 10
+    
+    printf("Original: num = %d\n", num);
+    modifyReference(&num);
+    printf("After pass by reference: num = %d\n", num);  // Changed to 100
+    
+    return 0;
+}
+```
+
+### 10.5 Recursive Functions
+
+**Definition:** Function that calls itself.
+
+**Example:**
+```c
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n <= 1) {
+        return 1;  // Base case
+    }
+    return n * factorial(n - 1);  // Recursive call
+}
+
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    printf("Factorial of 5: %d\n", factorial(5));
+    
+    printf("Fibonacci sequence: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", fibonacci(i));
+    }
+    printf("\n");
+    
+    return 0;
+}
+```
+
+### 10.6 Array as Function Parameter
+
+**Example:**
+```c
+#include <stdio.h>
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int sumArray(int arr[], int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    
+    printArray(numbers, size);
+    printf("Sum: %d\n", sumArray(numbers, size));
+    
+    return 0;
+}
+```
+
+---
+
+## 11. Structures and Unions
+
+### 11.1 Structure Basics
+
+**Definition:** User-defined data type that groups related variables of different data types.
+
+**Syntax:**
+```c
+struct structure_name {
+    datatype member1;
+    datatype member2;
+    // ...
+};
+```
+
+**Example:**
+```c
+#include <stdio.h>
+
+struct Student {
+    char name[50];
+    int roll;
+    float marks;
+};
+
+int main() {
+    struct Student s1;
+    
+    // Assign values
+    strcpy(s1.name, "John");
+    s1.roll = 101;
+    s1.marks = 85.5;
+    
+    // Access and display
+    printf("Name: %s\n", s1.name);
+    printf("Roll: %d\n", s1.roll);
+    printf("Marks: %.2f\n", s1.marks);
+    
+    return 0;
+}
+```
+
+### 11.2 Structure Initialization
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    char title[100];
+    char author[50];
+    int pages;
+    float price;
+};
+
+int main() {
+    // Method 1: Initialize during declaration
+    struct Book b1 = {"C Programming", "Dennis Ritchie", 500, 29.99};
+    
+    // Method 2: Initialize members individually
+    struct Book b2;
+    strcpy(b2.title, "Data Structures");
+    strcpy(b2.author, "Tanenbaum");
+    b2.pages = 600;
+    b2.price = 39.99;
+    
+    printf("Book 1: %s by %s\n", b1.title, b1.author);
+    printf("Book 2: %s by %s\n", b2.title, b2.author);
+    
+    return 0;
+}
+```
+
+### 11.3 Array of Structures
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Student {
+    char name[50];
+    int roll;
+    float marks;
+};
+
+int main() {
+    struct Student students[3];
+    
+    // Input
+    for (int i = 0; i < 3; i++) {
+        printf("\nStudent %d:\n", i + 1);
+        printf("Name: ");
+        scanf("%s", students[i].name);
+        printf("Roll: ");
+        scanf("%d", &students[i].roll);
+        printf("Marks: ");
+        scanf("%f", &students[i].marks);
+    }
+    
+    // Output
+    printf("\n\nStudent Records:\n");
+    printf("%-20s %-10s %-10s\n", "Name", "Roll", "Marks");
+    printf("----------------------------------------\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%-20s %-10d %-10.2f\n", 
+               students[i].name, students[i].roll, students[i].marks);
+    }
+    
+    return 0;
+}
+```
+
+### 11.4 Nested Structures
+
+**Definition:** Structure within another structure.
+
+**Example:**
+```c
+#include <stdio.h>
+
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct Employee {
+    char name[50];
+    int id;
+    struct Date joinDate;
+};
+
+int main() {
+    struct Employee emp = {"Alice", 1001, {15, 6, 2020}};
+    
+    printf("Employee: %s\n", emp.name);
+    printf("ID: %d\n", emp.id);
+    printf("Join Date: %d/%d/%d\n", 
+           emp.joinDate.day, emp.joinDate.month, emp.joinDate.year);
+    
+    return 0;
+}
+```
+
+### 11.5 Structure and Pointers
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct Point {
+    int x;
+    int y;
+};
+
+int main() {
+    struct Point p1 = {10, 20};
+    struct Point *ptr = &p1;
+    
+    // Access using dot operator
+    printf("Using dot: (%d, %d)\n", p1.x, p1.y);
+    
+    // Access using arrow operator
+    printf("Using arrow: (%d, %d)\n", ptr->x, ptr->y);
+    
+    // Modify using pointer
+    ptr->x = 30;
+    ptr->y = 40;
+    printf("After modification: (%d, %d)\n", p1.x, p1.y);
+    
+    return 0;
+}
+```
+
+### 11.6 Unions
+
+**Definition:** Similar to structure but all members share the same memory location.
+
+**Explanation:** Only one member can hold a value at a time. Size equals the largest member.
+
+**Example:**
+```c
+#include <stdio.h>
+
+union Data {
+    int i;
+    float f;
+    char c;
+};
+
+int main() {
+    union Data data;
+    
+    printf("Size of union: %lu bytes\n", sizeof(data));
+    
+    data.i = 10;
+    printf("data.i = %d\n", data.i);
+    
+    data.f = 220.5;
+    printf("data.f = %.2f\n", data.f);
+    printf("data.i = %d (corrupted)\n", data.i);  // Value corrupted
+    
+    data.c = 'A';
+    printf("data.c = %c\n", data.c);
+    printf("data.f = %.2f (corrupted)\n", data.f);  // Value corrupted
+    
+    return 0;
+}
+```
+
+### 11.7 typedef with Structures
+
+**Definition:** Creating an alias for struct to simplify declarations.
+
+**Example:**
+```c
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    char name[50];
+    int age;
+    float salary;
+} Employee;
+
+int main() {
+    // No need to write 'struct' keyword
+    Employee emp1, emp2;
+    
+    strcpy(emp1.name, "Bob");
+    emp1.age = 30;
+    emp1.salary = 50000.0;
+    
+    strcpy(emp2.name, "Alice");
+    emp2.age = 28;
+    emp2.salary = 55000.0;
+    
+    printf("Employee 1: %s, Age: %d, Salary: %.2f\n", 
+           emp1.name, emp1.age, emp1.salary);
+    printf("Employee 2: %s, Age: %d, Salary: %.2f\n", 
+           emp2.name, emp2.age, emp2.salary);
+    
+    return 0;
+}
+```
+
+---
+
 ## 12. File Handling
 
 ### 12.1 File Pointers and Opening Files
